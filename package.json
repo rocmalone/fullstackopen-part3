@@ -1,0 +1,25 @@
+{
+  "name": "fullstackopen-part3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/beyond-boreas/fullstackopen-part3.git"
+  },
+  "author": "beyond-boreas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/beyond-boreas/fullstackopen-part3/issues"
+  },
+  "homepage": "https://github.com/beyond-boreas/fullstackopen-part3#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.21"
+  }
+}
