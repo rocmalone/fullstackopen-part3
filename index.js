@@ -1,5 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 const app = express()
 
 let persons = [
@@ -24,6 +25,87 @@ let persons = [
       "number": "39-23-6423122"
     }
 ]
+
+let notes = [
+    {
+    "id": 1,
+    "content": "HTML is easy",
+    "important": true
+    },
+    {
+    "id": 2,
+    "content": "Browser can execute only JavaScript",
+    "important": false
+    },
+    {
+    "id": 3,
+    "content": "GET and POST are the most important methods of HTTP protocol",
+    "important": false
+    },
+    {
+    "content": "test",
+    "important": false,
+    "id": 4
+    },
+    {
+    "content": "test",
+    "important": false,
+    "id": 5
+    },
+    {
+    "content": "test3",
+    "important": false,
+    "id": 6
+    },
+    {
+    "content": "banaana",
+    "important": false,
+    "id": 7
+    },
+    {
+    "content": "asdf",
+    "important": true,
+    "id": 8
+    },
+    {
+    "content": "test",
+    "important": true,
+    "id": 9
+    },
+    {
+    "content": "test",
+    "important": false,
+    "id": 10
+    },
+    {
+    "content": "llll",
+    "important": true,
+    "id": 11
+    },
+    {
+    "content": "asdfasdf",
+    "important": false,
+    "id": 12
+    },
+    {
+    "content": "asdfasdf",
+    "important": true,
+    "id": 13
+    },
+    {
+    "content": "test note",
+    "important": true,
+    "id": 14
+    },
+    {
+    "content": "test note",
+    "important": true,
+    "id": 15
+    }
+]
+
+// CORS middleware to allow cross-origin resource sharing
+app.use(cors())
 
 // Active express JSON parser middleware
 // JSON parser takes the JSON data of a request and transforms it into a JS obj
@@ -57,6 +139,10 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :b
 // GET all persons
 app.get('/api/persons', (request, response) => {
     response.json(persons)
+})
+
+app.get('/api/notes', (request, response) => {
+    response.json(notes)
 })
 
 // GET person by id
@@ -137,7 +223,7 @@ function unknownEndpoint (request, response) {
 app.use(unknownEndpoint)
 
 
-const PORT = 3001
+const PORT = process.env.port || 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
