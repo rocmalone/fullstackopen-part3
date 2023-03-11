@@ -1,4 +1,5 @@
 const express = require('express')
+const morgan = require('morgan')
 const app = express()
 
 let persons = [
@@ -24,11 +25,34 @@ let persons = [
     }
 ]
 
-// Active express JSON parser
+// Active express JSON parser middleware
 // JSON parser takes the JSON data of a request and transforms it into a JS obj
 // and attaches it to the body property of the object (in this case, request.body)
 app.use(express.json())
 
+// Morgan logger middleware
+// Create new morgan token :body
+morgan.token('body', (request, response) => {
+    return JSON.stringify(request.body)
+})
+// Activate morgan with custom format log
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
+
+// Middleware which prints information about every request that is sent to the server
+// function requestLogger (request, response, next) {
+//     console.log('Method: ', request.method)
+//     console.log('Path:   ', request.path)
+//     console.log('Body:   ', request.body)
+//     console.log('---')
+//     next()
+// }
+
+// app.use(requestLogger)
+
+
+
+
+/// ROUTES
 
 // GET all persons
 app.get('/api/persons', (request, response) => {
@@ -106,9 +130,11 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max)
 }
 
+function unknownEndpoint (request, response) {
+    response.status(404).send({ error: 'unknown endpoint' })
+}
 
-
-
+app.use(unknownEndpoint)
 
 
 const PORT = 3001
