@@ -26,84 +26,6 @@ let persons = [
     }
 ]
 
-let notes = [
-    {
-    "id": 1,
-    "content": "HTML is easy",
-    "important": true
-    },
-    {
-    "id": 2,
-    "content": "Browser can execute only JavaScript",
-    "important": false
-    },
-    {
-    "id": 3,
-    "content": "GET and POST are the most important methods of HTTP protocol",
-    "important": false
-    },
-    {
-    "content": "test",
-    "important": false,
-    "id": 4
-    },
-    {
-    "content": "test",
-    "important": false,
-    "id": 5
-    },
-    {
-    "content": "test3",
-    "important": false,
-    "id": 6
-    },
-    {
-    "content": "banaana",
-    "important": false,
-    "id": 7
-    },
-    {
-    "content": "asdf",
-    "important": true,
-    "id": 8
-    },
-    {
-    "content": "test",
-    "important": true,
-    "id": 9
-    },
-    {
-    "content": "test",
-    "important": false,
-    "id": 10
-    },
-    {
-    "content": "llll",
-    "important": true,
-    "id": 11
-    },
-    {
-    "content": "asdfasdf",
-    "important": false,
-    "id": 12
-    },
-    {
-    "content": "asdfasdf",
-    "important": true,
-    "id": 13
-    },
-    {
-    "content": "test note",
-    "important": true,
-    "id": 14
-    },
-    {
-    "content": "test note",
-    "important": true,
-    "id": 15
-    }
-]
-
 // CORS middleware to allow cross-origin resource sharing
 app.use(cors())
 
@@ -120,29 +42,12 @@ morgan.token('body', (request, response) => {
 // Activate morgan with custom format log
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
-// Middleware which prints information about every request that is sent to the server
-// function requestLogger (request, response, next) {
-//     console.log('Method: ', request.method)
-//     console.log('Path:   ', request.path)
-//     console.log('Body:   ', request.body)
-//     console.log('---')
-//     next()
-// }
-
-// app.use(requestLogger)
-
-
-
 
 /// ROUTES
 
 // GET all persons
 app.get('/api/persons', (request, response) => {
     response.json(persons)
-})
-
-app.get('/api/notes', (request, response) => {
-    response.json(notes)
 })
 
 // GET person by id
@@ -216,6 +121,7 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max)
 }
 
+// Our own middleware function, used to hijack the 404 response and provide our own error.
 function unknownEndpoint (request, response) {
     response.status(404).send({ error: 'unknown endpoint' })
 }
