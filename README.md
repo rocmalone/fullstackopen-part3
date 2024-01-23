@@ -1,1 +1,5 @@
-Link to deployed app:  [acong-fso-part3-phonebook.fly.dev](acong-fso-part3-phonebook.fly.dev)
+# fullstackopen-part3
+My first full stack web app, using React, MongoDB, and Node.js/Express.js.  Deployed as containers on fly.io.
+
+## Functions
+Save, edit, and search a personal address book.
